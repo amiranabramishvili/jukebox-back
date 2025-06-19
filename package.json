@@ -23,7 +23,8 @@
     "@nestjs/class-transformer": "^0.4.0",
     "@nestjs/common": "^11.0.1",
     "@nestjs/core": "^11.0.1",
-    "@nestjs/mapped-types": "^2.1.0",
+    "@nestjs/mapped-types": "*",
+
     "@nestjs/platform-express": "^11.0.1",
     "class-transform": "^0.7.0",
     "class-transformer": "^0.5.1",
