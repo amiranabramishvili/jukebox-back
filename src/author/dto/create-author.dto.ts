@@ -5,7 +5,7 @@ export class CreateAuthorDto {
     firstName: string;
 
     @IsString()
-    lastname : string;
+    lastName : string;
 
     @IsString()
     biography: string;
