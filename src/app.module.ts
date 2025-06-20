@@ -1,17 +1,12 @@
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-<<<<<<< Updated upstream
 import { AuthorModule } from './author/author.module';
 import { AlbumsModule } from './albums/albums.module';
-@Module({
-  imports: [AuthorModule,AlbumsModule],
-=======
+import { SearchModule } from './search/search.module';
 import { MusicModule } from './music/music.module';
-
 @Module({
-  imports: [MusicModule],
->>>>>>> Stashed changes
+  imports: [AuthorModule,AlbumsModule, SearchModule,MusicModule],
   controllers: [AppController],
   providers: [AppService],
 })
