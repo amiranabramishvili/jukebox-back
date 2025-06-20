@@ -1,4 +1,6 @@
-import {IsString } from "class-validator";
+import { Type } from "class-transformer";
+import {IsString, ValidateNested } from "class-validator";
+import { CreateMusicDto } from "src/music/dto/create-music.dto";
 
 export class CreateAuthorDto {
     @IsString()
@@ -9,6 +11,10 @@ export class CreateAuthorDto {
 
     @IsString()
     biography: string;
+
+    @ValidateNested()
+    @Type(() => CreateMusicDto)
+    music :CreateMusicDto
 
     
 }
