@@ -26,7 +26,7 @@ export class AuthorRepository {
     }
 
     remove(id: number) {
-        return this.authorRepo.softDelete(id)
+        return this.authorRepo.delete(id)
     }
 
     updateAuthor(id: number, data: UpdateAuthorDto) {
