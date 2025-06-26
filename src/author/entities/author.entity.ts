@@ -5,17 +5,17 @@ import { Column, CreateDateColumn, DeleteDateColumn, Entity, PrimaryGeneratedCol
 export class Author {
     @PrimaryGeneratedColumn()
     id: number
-    
-    @Column({type: 'varchar'})
+
+    @Column({ type: 'varchar', length: 255 })
     firstName: string
 
-    @Column({type: 'varchar'})
+    @Column({ type: 'varchar', length: 255})
     lastName: string
 
-    @Column({type: 'text'})
+    @Column({ type: 'text' })
     biography: string
 
-    @Column({type: 'json'})
+    @Column({ type: 'json' })
     music: CreateMusicDto
 
     @CreateDateColumn()
