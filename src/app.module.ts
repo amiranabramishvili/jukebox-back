@@ -12,8 +12,8 @@ import { AlbumModule } from './album/album.module';
       host: 'localhost',
       port: 3306,
       username: 'root',
-      password: 'Novatori131!',
-      database: 'jukebox',
+      password: '123456',
+      database: 'axali',
       autoLoadEntities: true,
       synchronize: true
     }),
