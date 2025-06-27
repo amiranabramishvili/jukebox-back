@@ -1,5 +1,5 @@
 import { Type } from "class-transformer";
-import {IsString, ValidateNested } from "class-validator";
+import { IsString, ValidateNested } from "class-validator";
 import { CreateMusicDto } from "src/music/dto/create-music.dto";
 
 export class CreateAuthorDto {
@@ -7,14 +7,14 @@ export class CreateAuthorDto {
     firstName: string;
 
     @IsString()
-    lastName : string;
+    lastName: string;
 
     @IsString()
     biography: string;
 
     @ValidateNested()
     @Type(() => CreateMusicDto)
-    music :CreateMusicDto
+    music: CreateMusicDto
 
-    
+
 }

@@ -1,47 +1,32 @@
 import { Injectable } from '@nestjs/common';
 import { CreateAuthorDto } from './dto/create-author.dto';
 import { UpdateAuthorDto } from './dto/update-author.dto';
+import { AuthorRepository } from './author.repository';
 
 @Injectable()
 export class AuthorService {
-  author:(CreateAuthorDto & {id: number})[] = []
-  idCounter = 1
+  constructor(private readonly authorRepository:AuthorRepository){}
+ 
   create(createAuthorDto: CreateAuthorDto) {
-    const idCounters = {
-      id :this.idCounter++,
-      ...createAuthorDto
-    }
-    this.author.push(idCounters)
-    return idCounters
+    return this.authorRepository.createAuthor(createAuthorDto)
   }
 
   findAll() {
-    return this.author
+    return this.authorRepository.findAllAuthor()
   }
 
   findOne(id: number) {
-    for(let i = 0;i <this.author.length;i++){
-      if(this.author[i].id === id){
-        return this.author[i]
-      }
-    }
+    return this.authorRepository.findOneAuthor(id)
+   
   }
 
   update(id: number, updateAuthorDto: UpdateAuthorDto) {
-    for (let i = 0; i < this.author.length; i++) {
-      if (this.author[i].id === id) {
-        Object.assign(this.author[i], updateAuthorDto);
-        return this.author[i];
-      }
-    }
-    return null; 
+    return this.authorRepository.updateAuthor(id,updateAuthorDto)
+    
   }
 
   remove(id: number) {
-    for(let i = 0;i < this.author.length;i++){
-      if(this.author[i].id === id){
-        this.author.splice(i,1)
-      }
-    }
+    return this.authorRepository.remove(id)
+    
   }
 }
