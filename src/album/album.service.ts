@@ -1,47 +1,29 @@
 import { Injectable } from '@nestjs/common';
 import { CreateAlbumDto } from './dto/create-album.dto';
 import { UpdateAlbumDto } from './dto/update-album.dto';
+import { AlbumRepository } from './album.repository';
 
 @Injectable()
 export class AlbumService {
-  album: (CreateAlbumDto & { id: number })[] = [];
-  idCount = 1;
+  constructor(private readonly albumRepository: AlbumRepository) {}
+
   create(createAlbumDto: CreateAlbumDto) {
-    const idCount = {
-      id: this.idCount++,
-      ...createAlbumDto,
-    };
-    this.album.push(idCount);
-    return idCount;
+    return this.albumRepository.create(createAlbumDto);
   }
 
   findAll() {
-    return this.album;
+    return this.albumRepository.findAll();
   }
 
   findOne(id: number) {
-    for (let i = 0; i < this.album.length; i++) {
-      if (this.album[i].id === id) {
-        return this.album[i];
-      }
-    }
+    return this.albumRepository.findOne(id);
   }
 
-  update(id: number, updateAlbumDto: UpdateAlbumDto) {
-    for (let i = 0; i < this.album.length; i++) {
-      if (this.album[i].id === id) {
-        Object.assign(this.album[i], updateAlbumDto);
-        return this.album[i];
-      }
-    }
-    return null;
+  update(id: number, data: UpdateAlbumDto) {
+    return this.albumRepository.update(id, data);
   }
 
   remove(id: number) {
-    for (let i = 0; i < this.album.length; i++) {
-      if (this.album[i].id === id) {
-        this.album.splice(i, 1);
-      }
-    }
+    return this.albumRepository.remove(id);
   }
 }
