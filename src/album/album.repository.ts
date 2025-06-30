@@ -33,7 +33,7 @@ export class AlbumRepository {
   update(id: number, data: UpdateAlbumDto) {
     const updateAlbum = this.findOne(id)
     if(!updateAlbum) {
-        return null;
+      throw new Error('raghaca errori ar mushaobs dzmao saiti');
     }
     Object.assign(updateAlbum, data);
     return this.albumRepository.update(id, data);

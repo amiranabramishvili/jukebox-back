@@ -6,16 +6,16 @@ export class Album {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column({ type: 'varchar', length: 255 })
+  @Column()
   title: string;
 
-  @Column({ type: 'varchar', length: 255 })
+  @Column()
   releaseDate: string;
 
   @Column({ type: 'json' })
   music: CreateMusicDto;
 
-  @Column({ type: 'varchar', length: 255 })
+  @Column()
   artistName: string;
 
   @CreateDateColumn()

@@ -6,6 +6,7 @@ import { AlbumRepository } from './album.repository';
 @Injectable()
 export class AlbumService {
   constructor(private readonly albumRepository: AlbumRepository) {}
+
   create(createAlbumDto: CreateAlbumDto) {
     return this.albumRepository.create(createAlbumDto);
   }
@@ -15,7 +16,7 @@ export class AlbumService {
   }
 
   findOne(id: number) {
-    return this.albumRepository.findOne(id)
+    return this.albumRepository.findOne(id);
   }
 
   update(id: number, data: UpdateAlbumDto) {
