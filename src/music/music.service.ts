@@ -1,50 +1,32 @@
 import { Injectable } from '@nestjs/common';
 import { CreateMusicDto } from './dto/create-music.dto';
 import { UpdateMusicDto } from './dto/update-music.dto';
+import { MusicRepository } from './music.repository';
+import { Music } from './entities/music.entity';
 
-
-export interface Music {
-  id: number;
-  name: string;
-  url: string;
-}
 
 
 @Injectable()
 export class MusicService {
-  private musics: Music[] = [];
+  constructor(private musicRepository: MusicRepository) {}
 
-  create(data: CreateMusicDto): Music {
-    const newMusic: Music = {
-      id: this.musics?.[this.musics.length - 1]?.id + 1 || 1,
-      name: data.name,
-      url: data.url,
-    }
-
-    this.musics.push(newMusic);
-    return newMusic;
+  async create(data: CreateMusicDto): Promise<Music> {
+    return await this.musicRepository.create(data)
   }
 
-  findAll(): Music[] {
-    return this.musics;
+  async findAll(): Promise<Music[]> {
+    return await this.musicRepository.findAll();
   }
 
-  findOne(id: number) {
-    return this.musics.find((element) => id === element.id);
+  async findOne(id: number) {
+    return await this.musicRepository.findOne(id);
   }
 
-  update(id: number, updateMusicDto: UpdateMusicDto) {
-    const music = this.findOne(id);
-
-    if (!music) {
-      throw new Error(`Music with id ${id} not found`);
-    }
-    music.name = updateMusicDto.name;
-    music.url = updateMusicDto.url;
-    return music;
+  async update(id: number, updateMusicDto: UpdateMusicDto) {
+    return await this.musicRepository.update(id, updateMusicDto);
   }
 
-  remove(id: number) {
-    this.musics = this.musics.filter((element) => element.id !== id);
+  async remove(id: number) {
+    return await this.musicRepository.delete(id);
   }
 }
