@@ -5,7 +5,7 @@ import { playlistRepository } from './playlist.repository';
 
 @Injectable()
 export class PlaylistService {
-  constructor(private readonly playlistRepo:playlistRepository){}
+  constructor(private readonly playlistRepo: playlistRepository){}
   create(createPlaylistDto: CreatePlaylistDto) {
     return this.playlistRepo.create(createPlaylistDto);
   }
@@ -19,7 +19,7 @@ export class PlaylistService {
   }
 
   update(id: number, updatePlaylistDto: UpdatePlaylistDto) {
-    return this.playlistRepo.update(id,updatePlaylistDto);
+    return this.playlistRepo.update(id, updatePlaylistDto);
   }
 
   remove(id: number) {

@@ -1,4 +1,4 @@
-import { Injectable } from "@nestjs/common";
+import { Injectable, NotFoundException } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Playlist } from "./entities/playlist.entity";
 import { Repository } from "typeorm";
@@ -13,8 +13,8 @@ export class playlistRepository {
     ){}
 
     async create(createPlaylistDto: CreatePlaylistDto){
-        const newPlaylist = await Object.assign(new Playlist(),createPlaylistDto)
-        return this.playlistRepo.save(newPlaylist)
+        const newPlaylist = Object.assign(new Playlist(),createPlaylistDto)
+        return await this.playlistRepo.save(newPlaylist)
     }
 
     async findAll(){
@@ -29,12 +29,12 @@ export class playlistRepository {
         return await this.playlistRepo.delete(id)
     }
 
-    async update(id: number,updatePlaylistDto: UpdatePlaylistDto){
-        const update = this.findOne(id)
+    async update(id: number, data: UpdatePlaylistDto){
+        const update = await this.findOne(id)
         if (!update) {
-            throw new Error('Author not found')
+            throw new NotFoundException('Author not found')
         }
-        Object.assign(updatePlaylistDto, update)
-        return await this.playlistRepo.update
+        Object.assign(data, update)
+        return this.playlistRepo.update(id, data)
     }
 }

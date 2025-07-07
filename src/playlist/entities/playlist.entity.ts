@@ -10,7 +10,7 @@ export class Playlist {
     description: string;
 
     @Column()
-    userId: number
+    userId: number;
 
     
 }

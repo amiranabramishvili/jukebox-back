@@ -35,6 +35,6 @@ export class AuthorRepository {
             throw new Error('Author not found')
         }
         Object.assign(data, update)
-        return this.authorRepo.update
+        return this.authorRepo.update(id,data)
     }
 }
