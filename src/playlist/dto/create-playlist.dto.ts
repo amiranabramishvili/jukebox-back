@@ -11,7 +11,9 @@ export class CreatePlaylistDto {
     description: string;
 
     @IsString()
-    userId: number
+    userId: number;
+
+    
 
    
 }

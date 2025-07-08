@@ -13,7 +13,7 @@ export class playlistRepository {
     ){}
 
     async create(createPlaylistDto: CreatePlaylistDto){
-        const newPlaylist = Object.assign(new Playlist(),createPlaylistDto)
+        const newPlaylist = Object.assign(new Playlist(), createPlaylistDto)
         return await this.playlistRepo.save(newPlaylist)
     }
 
@@ -30,11 +30,11 @@ export class playlistRepository {
     }
 
     async update(id: number, data: UpdatePlaylistDto){
-        const update = await this.findOne(id)
+        const update = this.findOne(id)
         if (!update) {
             throw new NotFoundException('Author not found')
         }
         Object.assign(data, update)
-        return this.playlistRepo.update(id, data)
+        return await this.playlistRepo.update(id, data)
     }
 }
