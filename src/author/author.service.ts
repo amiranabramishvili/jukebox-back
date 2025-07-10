@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { CreateAuthorDto } from './dto/create-author.dto';
 import { UpdateAuthorDto } from './dto/update-author.dto';
 import { AuthorRepository } from './author.repository';
+import { SearchAuthorDto } from './dto/search-author.dto';
 
 @Injectable()
 export class AuthorService {
@@ -29,4 +30,7 @@ export class AuthorService {
     return this.authorRepository.remove(id)
     
   }
+  async search(params: SearchAuthorDto) {
+  return await this.authorRepository.search(params);
+}
 }

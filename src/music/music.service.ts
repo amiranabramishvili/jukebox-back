@@ -3,6 +3,7 @@ import { CreateMusicDto } from './dto/create-music.dto';
 import { UpdateMusicDto } from './dto/update-music.dto';
 import { MusicRepository } from './music.repository';
 import { Music } from './entities/music.entity';
+import { SearchMusicDto } from './dto/search-music.dto';
 
 
 
@@ -29,4 +30,7 @@ export class MusicService {
   async remove(id: number) {
     return await this.musicRepository.delete(id);
   }
+  async search(params: SearchMusicDto): Promise<Music[]> {
+  return await this.musicRepository.search(params);
+}
 }
