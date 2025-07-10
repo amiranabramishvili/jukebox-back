@@ -4,6 +4,8 @@ import { Album } from './entities/album.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { UpdateAlbumDto } from './dto/update-album.dto';
+import { ILike } from 'typeorm';
+import { SearchAlbumDto } from './dto/search-album.dto';
 
 @Injectable()
 export class AlbumRepository {
@@ -42,4 +44,17 @@ export class AlbumRepository {
   remove(id: number) {
     return this.albumRepository.softDelete(id)
   }
+  async search(params: SearchAlbumDto): Promise<Album[]> {
+  const where: any = {};
+
+  if (params.title) {
+    where.title = ILike(`%${params.title}%`);
+  }
+
+  if (params.artistName) {
+    where.artistName = ILike(`%${params.artistName}%`);
+  }
+
+  return await this.albumRepository.find({ where });
+}
 }

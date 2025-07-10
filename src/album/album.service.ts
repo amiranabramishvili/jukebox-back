@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { CreateAlbumDto } from './dto/create-album.dto';
 import { UpdateAlbumDto } from './dto/update-album.dto';
 import { AlbumRepository } from './album.repository';
+import { SearchAlbumDto } from './dto/search-album.dto';
 
 @Injectable()
 export class AlbumService {
@@ -26,4 +27,7 @@ export class AlbumService {
   remove(id: number) {
     return this.albumRepository.remove(id);
   }
+  async search(params: SearchAlbumDto) {
+    return await this.albumRepository.search(params);
+}
 }

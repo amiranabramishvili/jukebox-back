@@ -2,6 +2,8 @@ import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/commo
 import { MusicService} from './music.service';
 import { CreateMusicDto } from './dto/create-music.dto';
 import { UpdateMusicDto } from './dto/update-music.dto';
+import { Query } from '@nestjs/common';
+import { SearchMusicDto } from './dto/search-music.dto';
 
 
 @Controller('music')
@@ -17,6 +19,10 @@ export class MusicController {
   findAll() {
     return this.musicService.findAll();
   }
+  @Get('search')
+  search(@Query() query: SearchMusicDto) {
+    return this.musicService.search(query);
+}
 
   @Get(':id')
   findOne(@Param('id') id: string) {
