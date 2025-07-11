@@ -14,5 +14,5 @@ export class CreateAuthorDto {
 
     @ValidateNested()
     @Type(() => CreateMusicDto)
-    music: CreateMusicDto;
+    music: CreateMusicDto[];
 }

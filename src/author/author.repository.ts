@@ -21,20 +21,20 @@ export class AuthorRepository {
         return this.authorRepo.find()
     }
 
-    findOneAuthor(id: number) {
-        return this.authorRepo.findOneBy({ id })
+   async findOneAuthor(id: number) {
+        return  await this.authorRepo.findOneBy({ id })
     }
 
     remove(id: number) {
         return this.authorRepo.delete(id)
     }
 
-    updateAuthor(id: number, data: UpdateAuthorDto) {
+   async updateAuthor(id: number, data: UpdateAuthorDto) {
         const update = this.findOneAuthor(id)
         if (!update) {
             throw new Error('Author not found')
         }
         Object.assign(data, update)
-        return this.authorRepo.update(id,data)
+        return await this.authorRepo.update(id,data)
     }
 }
