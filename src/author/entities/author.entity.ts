@@ -1,5 +1,6 @@
 import { CreateMusicDto } from "src/music/dto/create-music.dto";
-import { Column, CreateDateColumn, DeleteDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { Music } from "src/music/entities/music.entity";
+import { Column, CreateDateColumn, DeleteDateColumn, Entity, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 
 @Entity()
 export class Author {
@@ -15,8 +16,8 @@ export class Author {
     @Column({ type: 'text' })
     biography: string
 
-    @Column({ type: 'json' })
-    music: CreateMusicDto
+    @OneToMany(() => Music,(music) => music.author)
+    music: Music[]
 
     @CreateDateColumn()
     createdAt: Date

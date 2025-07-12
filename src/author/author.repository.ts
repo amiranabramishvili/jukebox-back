@@ -26,6 +26,10 @@ export class AuthorRepository {
     return this.authorRepo.findOneBy({ id });
   }
 
+   async findOneAuthor(id: number) {
+        return  await this.authorRepo.findOneBy({ id })
+    
+     
   remove(id: number) {
     return this.authorRepo.delete(id);
   }
@@ -46,6 +50,15 @@ export class AuthorRepository {
       where.firstName = ILike(`%${params.firstName}%`);
     }
 
+   async updateAuthor(id: number, data: UpdateAuthorDto) {
+        const update = this.findOneAuthor(id)
+        if (!update) {
+            throw new Error('Author not found')
+        }
+     
+        Object.assign(data, update)
+        return await this.authorRepo.update(id,data)
+     
     if (params.lastName) {
       where.lastName = ILike(`%${params.lastName}%`);
     }

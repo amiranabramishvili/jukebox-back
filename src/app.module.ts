@@ -7,6 +7,7 @@ import { MusicModule } from './music/music.module';
 import { AlbumModule } from './album/album.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { UserModule } from './user/user.module';
+import { PlaylistModule } from './playlist/playlist.module';
 @Module({
   imports: [
     TypeOrmModule.forRoot({
@@ -14,8 +15,8 @@ import { UserModule } from './user/user.module';
       host: 'localhost',
       port: 3306,
       username: 'root',
-      password: '123123123',
-      database: 'music_app',
+      password: 'Novatori131!',
+      database: 'jukebox',
       autoLoadEntities: true,
       synchronize: true,
     }),
@@ -23,6 +24,7 @@ import { UserModule } from './user/user.module';
     AuthorModule,
     AlbumModule,
     UserModule,
+    PlaylistModule,
   ],
   controllers: [AppController],
   providers: [AppService],
