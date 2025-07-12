@@ -2,6 +2,8 @@ import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/commo
 import { AuthorService } from './author.service';
 import { CreateAuthorDto } from './dto/create-author.dto';
 import { UpdateAuthorDto } from './dto/update-author.dto';
+import { Query } from '@nestjs/common';
+import { SearchAuthorDto } from './dto/search-author.dto';
 
 @Controller('author')
 export class AuthorController {
@@ -16,6 +18,10 @@ export class AuthorController {
   findAll() {
     return this.authorService.findAll();
   }
+  @Get('search')
+  search(@Query() query: SearchAuthorDto) {
+   return this.authorService.search(query);
+}
 
   @Get(':id')
   findOne(@Param('id') id: string) {
