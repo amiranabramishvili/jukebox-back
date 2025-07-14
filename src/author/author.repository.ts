@@ -1,4 +1,4 @@
-import { Injectable } from "@nestjs/common";
+import { Injectable, NotFoundException } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Author } from "./entities/author.entity";
 import { Repository, ILike } from "typeorm";
@@ -13,31 +13,27 @@ export class AuthorRepository {
     private authorRepo: Repository<Author>
   ) {}
 
-  createAuthor(data: CreateAuthorDto) {
+  create(data: CreateAuthorDto) {
     const newAuthor = Object.assign(new Author(), data);
     return this.authorRepo.save(newAuthor);
   }
 
-  findAllAuthor() {
+  findAll() {
     return this.authorRepo.find();
   }
 
-  findOneAuthor(id: number) {
+  findOne(id: number) {
     return this.authorRepo.findOneBy({ id });
   }
 
-   async findOneAuthor(id: number) {
-        return  await this.authorRepo.findOneBy({ id })
-    
-     
   remove(id: number) {
     return this.authorRepo.delete(id);
   }
 
-  async updateAuthor(id: number, data: UpdateAuthorDto) {
-    const author = await this.findOneAuthor(id);
+  async update(id: number, data: UpdateAuthorDto) {
+    const author = await this.findOne(id);
     if (!author) {
-      throw new Error('Author not found');
+      throw new NotFoundException('Author not found');
     }
     Object.assign(author, data);
     return this.authorRepo.save(author);
@@ -50,19 +46,10 @@ export class AuthorRepository {
       where.firstName = ILike(`%${params.firstName}%`);
     }
 
-   async updateAuthor(id: number, data: UpdateAuthorDto) {
-        const update = this.findOneAuthor(id)
-        if (!update) {
-            throw new Error('Author not found')
-        }
-     
-        Object.assign(data, update)
-        return await this.authorRepo.update(id,data)
-     
     if (params.lastName) {
       where.lastName = ILike(`%${params.lastName}%`);
     }
 
-    return await this.authorRepo.find({ where });
+    return this.authorRepo.find({ where });
   }
 }
