@@ -8,6 +8,7 @@ import { AlbumModule } from './album/album.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { UserModule } from './user/user.module';
 import { PlaylistModule } from './playlist/playlist.module';
+import { AuthModule } from './auth/auth.module';
 @Module({
   imports: [
     TypeOrmModule.forRoot({
@@ -25,6 +26,7 @@ import { PlaylistModule } from './playlist/playlist.module';
     AlbumModule,
     UserModule,
     PlaylistModule,
+    AuthModule,
   ],
   controllers: [AppController],
   providers: [AppService],
