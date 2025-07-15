@@ -18,7 +18,12 @@ export class playlistRepository {
     }
 
     async findAll(){
-        return await this.playlistRepo.find()
+        return await this.playlistRepo.find({
+            relations: {
+                musics: true,
+                user: true
+            }
+        })
     }
 
     async findOne(id: number){

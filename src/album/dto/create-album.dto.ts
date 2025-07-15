@@ -14,7 +14,7 @@ export class CreateAlbumDto {
 
     @ValidateNested()
     @Type(() => CreateMusicDto)
-    music: CreateMusicDto;
+    music: CreateMusicDto[];
 
     @IsString()
     @IsNotEmpty()

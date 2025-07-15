@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreateAlbumDto } from './dto/create-album.dto';
 import { Album } from './entities/album.entity';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -15,17 +15,17 @@ export class AlbumRepository {
   ) {}
 
   create(createAlbumDto: CreateAlbumDto) {
-    const newAlbum = new Album();
-
-    newAlbum.title = createAlbumDto.title;
-    newAlbum.releaseDate = createAlbumDto.releaseDate;
-    newAlbum.music = createAlbumDto.music;
-    newAlbum.artistName = createAlbumDto.artistName;
-    return this.albumRepository.save(newAlbum);
+    const newAlbum = Object.assign(new Album(), createAlbumDto);
+    return this.albumRepository.save(newAlbum)
   }
 
   findAll() {
-    return this.albumRepository.find();
+    return this.albumRepository.find({
+      relations: {
+        author: true,
+        music: true
+      }
+    });
   }
 
   findOne(id: number) {
@@ -35,7 +35,7 @@ export class AlbumRepository {
   update(id: number, data: UpdateAlbumDto) {
     const updateAlbum = this.findOne(id)
     if(!updateAlbum) {
-      throw new Error('raghaca errori ar mushaobs dzmao saiti');
+      throw new NotFoundException('raghaca errori ar mushaobs dzmao saiti');
     }
     Object.assign(updateAlbum, data);
     return this.albumRepository.update(id, data);

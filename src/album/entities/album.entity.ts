@@ -1,5 +1,7 @@
+import { Author } from 'src/author/entities/author.entity';
 import { CreateMusicDto } from 'src/music/dto/create-music.dto';
-import { Column, CreateDateColumn, DeleteDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
+import { Music } from 'src/music/entities/music.entity';
+import { Column, CreateDateColumn, DeleteDateColumn, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
 
 @Entity()
 export class Album {
@@ -12,8 +14,11 @@ export class Album {
   @Column()
   releaseDate: string;
 
-  @Column({ type: 'json' })
-  music: CreateMusicDto;
+  @ManyToOne(() => Author,(author) => author.album )
+  author: Author
+
+  @OneToMany(() => Music, (music) => music.album)
+  music: Music[];
 
   @Column()
   artistName: string;

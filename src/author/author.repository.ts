@@ -19,7 +19,12 @@ export class AuthorRepository {
   }
 
   findAll() {
-    return this.authorRepo.find();
+    return this.authorRepo.find({
+      relations: {
+        album: true,
+        music: true
+      }
+    });
   }
 
   findOne(id: number) {

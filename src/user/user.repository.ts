@@ -10,7 +10,11 @@ export class UserRepository {
     constructor(@InjectRepository(User) private userRepository: Repository<User>) {}
 
     async findAll() {
-        return await this.userRepository.find();
+        return await this.userRepository.find({
+            relations: {
+                playList: true
+            }
+        });
     }
 
     async findOne(id: number) {

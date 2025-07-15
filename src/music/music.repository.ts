@@ -14,7 +14,13 @@ export class MusicRepository {
   ) {}
 
   async findAll() {
-    return await this.musicRepository.find();
+    return await this.musicRepository.find({
+      relations: {
+        album: true,
+        author: true,
+        playlists: true
+      }
+    });
   }
 
   async findOne(id: number) {
