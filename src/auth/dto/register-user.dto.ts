@@ -2,7 +2,7 @@ import { IsEmail, IsString, IsStrongPassword } from "class-validator";
 
 export class RegisterUserDto {
     @IsString()
-    name!: string;
+    name?: string;
 
     @IsEmail()
     email!: string;
