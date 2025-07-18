@@ -30,11 +30,7 @@ export class AuthService {
     }
 
     async register(registerUserDto: RegisterUserDto) {
-      const createUserDto = {
-        ...registerUserDto,
-        name: registerUserDto.name || `user_${Date.now()}`
-      };
-      const user = await this.userRepository.create(createUserDto);
+      const user = await this.userRepository.create(registerUserDto);
 
       if (!user) {
         throw new InternalServerErrorException('Can not register');
