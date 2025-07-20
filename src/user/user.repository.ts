@@ -11,9 +11,9 @@ export class UserRepository {
 
     async findAll() {
         return await this.userRepository.find({
-            relations: {
-                playList: true
-            }
+            relations: [
+                'playList'
+            ]
         });
     }
 

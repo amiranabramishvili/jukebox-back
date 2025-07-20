@@ -21,10 +21,10 @@ export class AlbumRepository {
 
   findAll() {
     return this.albumRepository.find({
-      relations: {
-        author: true,
-        music: true
-      }
+      relations: [
+        'author',
+        'music'
+      ]
     });
   }
 
