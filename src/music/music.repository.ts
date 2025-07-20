@@ -15,11 +15,11 @@ export class MusicRepository {
 
   async findAll() {
     return await this.musicRepository.find({
-      relations: {
-        album: true,
-        author: true,
-        playlists: true
-      }
+      relations: [
+        'album',
+        'author',
+        'playlists'
+      ]
     });
   }
 
