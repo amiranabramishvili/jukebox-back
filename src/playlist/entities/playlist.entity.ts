@@ -1,7 +1,9 @@
 import { CreateMusicDto } from "src/music/dto/create-music.dto";
 import { Music } from "src/music/entities/music.entity";
 import { User } from "src/user/entities/user.entity";
-import { BaseEntity, Column, CreateDateColumn, DeleteDateColumn, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { Column, CreateDateColumn, DeleteDateColumn, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { BaseEntity } from 'src/base/base.entity';
+
 
 @Entity()
 export class Playlist extends BaseEntity {

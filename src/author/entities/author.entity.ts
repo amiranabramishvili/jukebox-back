@@ -1,11 +1,12 @@
 import { Album } from "src/album/entities/album.entity";
 import { CreateMusicDto } from "src/music/dto/create-music.dto";
 import { Music } from "src/music/entities/music.entity";
-import { BaseEntity, Column, CreateDateColumn, DeleteDateColumn, Entity, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { Column, CreateDateColumn, DeleteDateColumn, Entity, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { BaseEntity } from "src/base/base.entity";
 
 @Entity()
 export class Author extends BaseEntity {
-    
+
     @Column({ type: 'varchar', length: 256 })
     firstName: string
 

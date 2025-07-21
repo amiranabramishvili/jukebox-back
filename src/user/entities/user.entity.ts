@@ -1,14 +1,10 @@
 import { Playlist } from 'src/playlist/entities/playlist.entity';
 import {
-  BaseEntity,
   Column,
-  CreateDateColumn,
-  DeleteDateColumn,
   Entity,
   OneToMany,
-  PrimaryGeneratedColumn,
-  UpdateDateColumn,
 } from 'typeorm';
+import { BaseEntity } from 'src/base/base.entity';
 
 @Entity('user')
 export class User extends BaseEntity {

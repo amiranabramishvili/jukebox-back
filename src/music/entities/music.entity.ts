@@ -4,6 +4,7 @@ import { BaseEntity } from "src/base/base.entity";
 import { Playlist } from "src/playlist/entities/playlist.entity";
 import { Column, CreateDateColumn, DeleteDateColumn, Entity, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 
+
 @Entity('music')
 export class Music extends BaseEntity {
     @Column()
