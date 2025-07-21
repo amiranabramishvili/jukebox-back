@@ -1,32 +1,37 @@
-import { Playlist } from "src/playlist/entities/playlist.entity";
-import { Column, CreateDateColumn, DeleteDateColumn, Entity, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { Playlist } from 'src/playlist/entities/playlist.entity';
+import {
+  Column,
+  CreateDateColumn,
+  DeleteDateColumn,
+  Entity,
+  OneToMany,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn,
+} from 'typeorm';
 
 @Entity('user')
 export class User {
-      @PrimaryGeneratedColumn()
-      id!: number;
+  @PrimaryGeneratedColumn()
+  id!: number;
 
-      @Column()
-      name!: string;
+  @Column({ unique: true })
+  email!: string;
 
-      @Column({ unique: true })
-      email!: string;
+  @Column()
+  password!: string;
 
-      @Column()
-      password!: string;
+  @Column({ default: false })
+  isAdmin!: boolean;
 
-      @Column({ default: false })
-      isAdmin!: boolean;
+  @OneToMany(() => Playlist, (playlist) => playlist.user)
+  playList: Playlist;
 
-      @OneToMany(() => Playlist,(playlist) => playlist.user)
-      playList: Playlist
+  @CreateDateColumn()
+  createdAt!: Date;
 
-      @CreateDateColumn()
-      createdAt!: Date
-  
-      @UpdateDateColumn()
-      updatedAt!: Date
-  
-      @DeleteDateColumn()
-      deletedAt!: Date
+  @UpdateDateColumn()
+  updatedAt!: Date;
+
+  @DeleteDateColumn()
+  deletedAt!: Date;
 }
