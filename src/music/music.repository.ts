@@ -14,13 +14,14 @@ export class MusicRepository {
   ) {}
 
   async findAll() {
-    return await this.musicRepository.find({
-      relations: [
-        'album',
-        'author',
-        'playlists'
-      ]
-    });
+    return await this.musicRepository.createQueryBuilder('music')
+    .leftJoinAndSelect('playlist','p')
+    .leftJoinAndSelect('author','a')
+    .leftJoinAndSelect('album','a')
+    .getMany()
+
+
+
   }
 
   async findOne(id: number) {

@@ -19,12 +19,10 @@ export class AuthorRepository {
   }
 
   findAll() {
-    return this.authorRepo.find({
-      relations: [
-        'album',
-        'music'
-      ]
-    });
+    return this.authorRepo.createQueryBuilder('author')
+    .leftJoinAndSelect('music','m')
+    .leftJoinAndSelect('album','a')
+    .getMany()
   }
 
   findOne(id: number) {

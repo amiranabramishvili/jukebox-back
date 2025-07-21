@@ -10,11 +10,9 @@ export class UserRepository {
     constructor(@InjectRepository(User) private userRepository: Repository<User>) {}
 
     async findAll() {
-        return await this.userRepository.find({
-            relations: [
-                'playList'
-            ]
-        });
+        return await this.userRepository.createQueryBuilder('user')
+        .leftJoinAndSelect('playlist','p')
+        .getMany()
     }
 
     async findOne(id: number) {

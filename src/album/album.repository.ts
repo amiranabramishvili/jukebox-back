@@ -20,12 +20,10 @@ export class AlbumRepository {
   }
 
   findAll() {
-    return this.albumRepository.find({
-      relations: [
-        'author',
-        'music'
-      ]
-    });
+    return this.albumRepository.createQueryBuilder('album')
+    .leftJoinAndSelect('author', 'au')
+    .leftJoinAndSelect('music', 'm')
+    .getMany()
   }
 
   findOne(id: number) {

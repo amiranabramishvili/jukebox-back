@@ -18,12 +18,10 @@ export class playlistRepository {
     }
 
     async findAll(){
-        return await this.playlistRepo.find({
-            relations: [
-                'musics',
-                'user'
-            ]
-        })
+        return await this.playlistRepo.createQueryBuilder('playlist')
+        .leftJoinAndSelect('user','u')
+        .leftJoinAndSelect('musics','m')
+        .getMany()
     }
 
     async findOne(id: number){

@@ -1,5 +1,6 @@
 import { Playlist } from 'src/playlist/entities/playlist.entity';
 import {
+  BaseEntity,
   Column,
   CreateDateColumn,
   DeleteDateColumn,
@@ -10,10 +11,8 @@ import {
 } from 'typeorm';
 
 @Entity('user')
-export class User {
-  @PrimaryGeneratedColumn()
-  id!: number;
-
+export class User extends BaseEntity {
+  
   @Column()
   name!: string;
 
@@ -29,12 +28,4 @@ export class User {
   @OneToMany(() => Playlist, (playlist) => playlist.user)
   playList: Playlist;
 
-  @CreateDateColumn()
-  createdAt!: Date;
-
-  @UpdateDateColumn()
-  updatedAt!: Date;
-
-  @DeleteDateColumn()
-  deletedAt!: Date;
 }

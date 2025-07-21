@@ -1,12 +1,11 @@
 import { CreateMusicDto } from "src/music/dto/create-music.dto";
 import { Music } from "src/music/entities/music.entity";
 import { User } from "src/user/entities/user.entity";
-import { Column, CreateDateColumn, DeleteDateColumn, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { BaseEntity, Column, CreateDateColumn, DeleteDateColumn, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 
 @Entity()
-export class Playlist {
-    @PrimaryGeneratedColumn()
-    id: number
+export class Playlist extends BaseEntity {
+   
 
     @Column({ nullable: true })
     description: string;
@@ -17,12 +16,5 @@ export class Playlist {
     @OneToMany(() => Music, (music) => music.playlists)
     musics: Music[]
 
-    @CreateDateColumn()
-    createAt: Date;
-
-    @UpdateDateColumn()
-    updateAt: Date;
-
-    @DeleteDateColumn()
-    deleteAt: Date;
+   
 }
