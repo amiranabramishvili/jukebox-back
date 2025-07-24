@@ -1,9 +1,8 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { BaseEntity } from "src/base/base.entity";
+import {Column, Entity } from "typeorm";
 
 @Entity()
-export class FileEntity {
-    @PrimaryGeneratedColumn()
-    id: number;
+export class FileEntity extends BaseEntity {
 
     @Column()
     fileName: string;
