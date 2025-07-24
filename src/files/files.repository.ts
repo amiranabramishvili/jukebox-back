@@ -12,12 +12,22 @@ export class FileRepository {
         private fileRepo: Repository<FileEntity>
     ) { }
 
-    async UploadFile(name: string, url: string) {
+    async save(name: string, url: string, key: string, bucket: string) {
         const newFile = new FileEntity()
         newFile.fileName = name
         newFile.url = url
+        newFile.key = key
+        newFile.bucket = bucket
 
         return this.fileRepo.save(newFile)
 
+    }
+
+    async findOne(id: number) {
+        return await this.fileRepo.findOneBy({ id })
+    }
+
+    async findAll() {
+        return await this.fileRepo.find()
     }
 }

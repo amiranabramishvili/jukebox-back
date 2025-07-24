@@ -10,12 +10,13 @@ export class S3Service {
     private s3Client: AWS.S3
 
     constructor() {
-        console.log('AWS config:',{ 
+        console.log('AWS config:', {
             accessKeyId: process.env.AWS_ACCESS_KEY_ID,
-            secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY});
-        
-        
-            
+            secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY
+        });
+
+
+
         this.s3Client = new AWS.S3({
             accessKeyId: process.env.AWS_ACCESS_KEY!,
             secretAccessKey: process.env.AWS_SECRET_ACCEES_KEY!,
@@ -23,12 +24,15 @@ export class S3Service {
             signatureVersion: 'v4'
         })
     }
-    async upload(fileName: string, file: Buffer, mimetype: MimeType) {
+    async upload(file: Express.Multer.File, key: string) {
+
+        const buffer: Buffer = file.buffer
+        const filekey = key
         const params = {
             Bucket: 'jukebox-bucket-general',
-            Key: '/music/someFile.mp3',
-            Body: file,
-            contentType: mimetype,
+            Key: filekey,
+            Body: buffer,
+            contentType: file.mimetype,
             CreateBucketConfiguration: {
                 LocationConstrait: 'eu-central-1'
             }

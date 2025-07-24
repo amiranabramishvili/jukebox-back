@@ -17,14 +17,27 @@ export class FilesService {
     const buffer: Buffer = file.buffer
     const fileName = file.originalname.split('.').slice(0, -1).join('.')
 
-    const result = this.s3Service.upload(fileName, buffer, file.mimetype)
+    const result = this.s3Service.upload(file, fileName)
 
-    console.log(result);
-    
 
-    const savedFile = await this.fileReposotory.UploadFile(fileName, 's3')
+
+    const savedFile = await this.fileReposotory.save(
+      fileName,
+      (await result).Location,
+      (await result).Key,
+      (await result).Bucket
+    )
+      
+      
 
     return savedFile
+  }
+  async findOne(id: number) {
+    const file = await this.fileReposotory.findOne(id)
+    return file
+  }
+  async findAll() {
+    return await this.fileReposotory.findAll()
   }
 }
 
