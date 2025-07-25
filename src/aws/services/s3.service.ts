@@ -1,6 +1,7 @@
 import { Injectable } from "@nestjs/common";
 import * as AWS from 'aws-sdk'
 import { MimeType } from "aws-sdk/clients/kendra";
+import { log } from "console";
 
 import * as dotenv from 'dotenv'
 dotenv.config({ path: '.env' })
@@ -43,6 +44,21 @@ export class S3Service {
             throw e
 
         }
+    }
+
+    async getPresignedUrl (key: string) {
+        const params = {
+            Bucket: 'jukebox-bucket-general',
+            Key: key
+        }
+        try {
+            const url =await this.s3Client.getSignedUrlPromise('getObject',params)
+            return url
+        } catch (error){
+            console.log(`failed for key ${key}`);
+            
+        };
+        
     }
 
 }

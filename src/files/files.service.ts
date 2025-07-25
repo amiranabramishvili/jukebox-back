@@ -27,8 +27,8 @@ export class FilesService {
       (await result).Key,
       (await result).Bucket
     )
-      
-      
+
+
 
     return savedFile
   }
@@ -39,6 +39,8 @@ export class FilesService {
   async findAll() {
     return await this.fileReposotory.findAll()
   }
+
+
 }
 
 
