@@ -3,6 +3,8 @@ import { CreateMusicDto } from 'src/music/dto/create-music.dto';
 import { Music } from 'src/music/entities/music.entity';
 import { Column, CreateDateColumn, DeleteDateColumn, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
 import { BaseEntity } from 'src/base/base.entity';
+import { File } from 'buffer';
+import { FileEntity } from 'src/files/entities/file.entity';
 
 @Entity()
 export class Album extends BaseEntity {
@@ -18,6 +20,9 @@ export class Album extends BaseEntity {
 
   @OneToMany(() => Music, (music) => music.album)
   music: Music[];
+
+  @ManyToOne(() => FileEntity,(FileEntity) => FileEntity.album)
+  file: FileEntity
 
   @Column()
   artistName: string;
