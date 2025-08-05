@@ -35,7 +35,7 @@ export class S3Service {
             Body: buffer,
             contentType: file.mimetype,
             CreateBucketConfiguration: {
-                LocationConstrait: 'eu-central-1'
+                LocationConstrait: 'eu-north-1'
             }
         }
         try {
