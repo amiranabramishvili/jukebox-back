@@ -10,6 +10,8 @@ import { UserModule } from './user/user.module';
 import { PlaylistModule } from './playlist/playlist.module';
 import { AuthModule } from './auth/auth.module';
 import { ConfigModule } from '@nestjs/config';
+import { FilesModule } from './files/files.module';
+import { AwsModule } from './aws/aws.module';
 
 @Module({
   imports: [ConfigModule.forRoot(),
@@ -29,6 +31,8 @@ import { ConfigModule } from '@nestjs/config';
     UserModule,
     PlaylistModule,
     AuthModule,
+    FilesModule,
+    AwsModule,
   ],
   controllers: [AppController],
   providers: [AppService],
