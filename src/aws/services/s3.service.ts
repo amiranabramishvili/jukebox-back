@@ -21,7 +21,7 @@ export class S3Service {
         this.s3Client = new AWS.S3({
             accessKeyId: process.env.AWS_ACCESS_KEY!,
             secretAccessKey: process.env.AWS_SECRET_ACCEES_KEY!,
-            region: 'eu-central-1',
+            region: 'eu-north-1',
             signatureVersion: 'v4'
         })
     }
