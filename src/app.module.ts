@@ -14,14 +14,17 @@ import { FilesModule } from './files/files.module';
 import { AwsModule } from './aws/aws.module';
 
 @Module({
-  imports: [ConfigModule.forRoot(),
+  imports: [
+    ConfigModule.forRoot({
+      isGlobal: true,
+    }),
     TypeOrmModule.forRoot({
       type: 'mysql',
-      host: 'database-1.cjik0uo02g88.eu-north-1.rds.amazonaws.com',
-      port: 3306,
-      username: 'jukebox',
-      password: 'Chichinadze14$',
-      database: 'novatori',
+      host: process.env.DATABASE_HOST,
+      port: Number(process.env.DATABASE_PORT),
+      username: process.env.DATABASE_USERNAME,
+      password: process.env.DATABASE_PASSWORD,
+      database: process.env.DATABASE_NAME,
       autoLoadEntities: true,
       synchronize: true,
     }),
